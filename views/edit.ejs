@@ -1,0 +1,38 @@
+<%- include("partials/header") %>
+<%- include("partials/adminHeader") %>
+
+<div class="container mt-5 pb-5 pt-5">
+    <form method="POST" action="/edit/<%= post._id %>?_method=PUT" enctype="multipart/form-data">
+        <div class="row shadow-effect main-background m-5 py-5">
+            <div class="input-group mb-3 col-md-6">
+                <input type="text" class="form-control" name="title" value="<%= post.title %>" maxlength="100" required>
+            </div>
+            <div class="input-group mb-3 col-md-6">
+                <input type="text" class="form-control" name="shortDesc" value="<%= post.shortDesc %>" maxlength="200" required>
+            </div>
+            <div class="input-group mb-3 col-md-6">
+                <input type="text" class="form-control" name="techs" value="<%= post.techs %>" maxlength="100" required>
+            </div>
+            <div class="input-group mb-3 col-md-6">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="image" accept=".jpeg, .jpg, .png, .gif, .tif, .tiff" id="inputGroupFile">
+                    <label class="custom-file-label" for="inputGroupFile">Upload new image</label>
+                </div>
+            </div>
+            <div class="input-group mb-3 col-md-12">
+                <input type="url" class="form-control" name="url" value="<%= post.url %>" required>
+            </div>
+            <div class="input-group mb-3 col col-12">
+                <textarea class="form-control" name="body" rows="6" required maxlength="5000"><%= post.body %></textarea>
+            </div>
+            <div class="input-group col col-12">
+                <button type="submit" class="btn btn-dark btn-block mb-2 mx-auto">Submit</button>
+            </div>
+            <div class="input-group col col-12">
+                <a href="/profile" class="btn btn-secondary btn-block mx-auto">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<%- include("partials/footer") %>

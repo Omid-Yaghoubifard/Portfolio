@@ -1,0 +1,59 @@
+<%- include("partials/header") %>
+<%- include("partials/adminHeader") %>
+
+<div class="container mt-5 pt-5">
+    <div class="tab-pane fade shadow-effect show active main-background mb-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+        <div class="mb-2 p-1 pl-2 profile-title">
+            <h6>Username: <a href="/profile"> <%= user.username %> </a> </h6>
+            <h6>Email: <a href="/profile"> <%= user.email %> </a> </h6>
+            <h6> Password: <span class="asterisk">**********</span></h6>
+            <button class="btn btn-primary passwordChange">Change Your Password</button>
+            <div class="toToggle mt-5">    
+                <form method="POST" action="/profile">
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Enter your new password" minlength="8" maxlength="256" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password2" class="form-control" placeholder="Confirm your new password" minlength="8" maxlength="256" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+                <button href="/profile" class="btn btn-secondary btn-block mt-2 cancelChange">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <% if(posts.length > 0){ %>
+        <div class="mt-5 mb-4 profile-title">
+            <div class="open-sans-font btn btn-secondary disabled mt-3">Your Portfolio at a Glance!</div>
+        </div>
+    <% } %>
+    <div class="row">
+        
+        <% posts.forEach(post =>{ %>
+
+            <div class="col-sm-6 col-lg-4 mb-5 very-small">
+                <div class="card-deck hovering-effect">
+                    <div class="card">
+                        <img class="card-img card-img-top" src="<%= post.image %>" alt="<%= post.title %>">
+                        <div class="card-body">
+                            <h4 class="card-title"><%= post.title %></h4>
+                            <p class="card-text text-info"><%= post.shortDesc %></p>
+                            <h6 class="card-title text-primary"><%= post.techs %></h6>
+                            <p class="card-text"><%= post.body %></p>
+                            <a href="<%= post.url %>" target="_blank" class= "btn btn-outline-success hovering-effect-button mr-1">Link</a>
+                            <a href="/edit/<%= post._id %>" class= "btn btn-outline-success hovering-effect-button mr-1">Edit</a>
+                            <% let color = post.hidden ? "btn-success" : "btn-outline-success" %>
+                            <button value="<%= post._id %>" class= "btn <%= color %> <%= post.hidden %> hovering-effect-button hide-posts mr-1">Hide</button>
+                            <a href="/delete/<%= post._id %>" class= "btn btn-outline-danger hovering-effect-button">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <% }); %>
+
+    </div>
+</div>
+
+<%- include("partials/footer") %>
