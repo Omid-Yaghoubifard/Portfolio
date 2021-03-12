@@ -11,7 +11,9 @@ const Post = new mongoose.Schema({
         default: false
     },  
     date: { type: Date, default: Date.now },
-    url: String
+    url: String,
+    github: String,
+    rank: Number
 });
 
 module.exports = mongoose.model("Post", Post);

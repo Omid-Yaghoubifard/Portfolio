@@ -1,6 +1,174 @@
 <%- include("partials/header") %>
 
+<div id="particles-js">
+    <div class="page-404"> 
+        <div class="outer"> 
+            <div class="middle"> 
+                <h1 class="inner">
+                    <p class="text-white home-header">Hello, I'm <span class="text-info">Omid Yaghoubifard</span>.</p>
+                    <p class="text-white home-header">I am a full-stack web developer.</p>
+                    <a class="btn btn-block btn-outline-light mt-4 arrow-btn" href="#home-portfolio">View my Portfolio &nbsp<i class="fal fa-arrow-right middle-align"></i></a>
+                </h1> 
+            </div> 
+        </div> 
+    </div> 
+</div>
+<div id="home-nav">
+    <nav class="navbar navbar-expand navbar-dark bg-dark nav-opacity">
+        <div class="container">         
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                    <a class="nav-link home-nav-item text-info mx-sm-2" id="home-item" href="#particles-js">HOME</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link home-nav-item text-white mx-sm-2" id="about-item" href="#home-about">ABOUT</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link home-nav-item text-white mx-sm-2" id="portfolio-item" href="#home-portfolio">PORTFOLIO</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link home-nav-item text-white mx-sm-2" id="contact-item" href="#home-contact">CONTACT</a>
+                  </li>
+              </ul>
+        </div>
+      </nav>
+</div>
+<div id="home-about" class="text-dark home-title-items pb-5">
+  <h2 class="section-titles">ABOUT</h2>
+  <hr class="home-title-hr">
+  <div class="container mt-5 pt-xl-5 pb-lg-5">
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="mb-4 pb-2 mb-lg-4 pb-lg-3 h2 home-secondary-titles">Who am I?</h3>
+        <p class="text-secondary home-desc h5">I'm a full-stack web developer based in Vancouver, BC.</p>
+        <p class="text-secondary home-desc h5">I have serious passion for back-end languages and technologies.</p>
+        <p class="text-secondary home-desc h5">All the while trying to keep UI & UX at the center of every project.</p>
+        <a class="btn btn-outline-secondary arrow-btn mt-3" id="contact-btn" href="#home-contact">Get in Touch &nbsp<i class="fal fa-arrow-right middle-align"></i></a>
+      </div>
+      <div class="col-md-6">
+        <h3 class="h2 mt-5 mt-md-0 mb-lg-3 home-secondary-titles">Technical Skills</h3>
+        <div class="container">
+          <div class="row">
+            <i class="mt-3 mb-lg-2 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>JavaScript</span><img src="icons/javascript.svg" alt="JavaScript"></i>
+            <i class="mt-3 mb-lg-2 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>MongoDB</span><img src="icons/mongodb.svg" alt="MongoDB"></i>
+            <i class="mt-3 mb-lg-2 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>Express.js</span><img class="size-limit" src="icons/express.png" alt="Express.js"></i>
+            <i class="mt-3 mb-lg-2 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>React</span><img src="icons/react.svg" alt="React"></i>
+            <i class="mt-3 mb-lg-2 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>Node.js</span><img src="icons/nodejs.svg" alt="Node.js"></i>
+            <i class="mt-3 mb-lg-2 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>Git+GitHub</span><img src="icons/github.svg" alt="GitHub"></i>
+            <i class="mt-3 mt-lg-4 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>HTML5</span><img src="icons/html-5.svg" alt="HTML5"></i>
+            <i class="mt-3 mt-lg-4 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>CSS3</span><img src="icons/css3.svg" alt="CSS3"></i>
+            <i class="mt-3 mt-lg-4 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>jQuery</span><img src="icons/jquery.svg" alt="jQuery"></i>
+            <i class="mt-3 mt-lg-4 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>Bootstrap</span><img src="icons/bootstrap.svg" alt="Bootstrap"></i>
+            <i class="mt-3 mt-lg-4 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>Sass</span><img src="icons/sass.svg" alt="Sass"></i>
+            <i class="mt-3 mt-lg-4 col-3 col-sm-2 col-md-3 col-lg-2 logo-icons"><span>DigitalOcean</span><img class="size-limit" src="icons/digitalocean.svg" alt="DigitalOcean"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="home-portfolio" class="text-dark home-title-items pb-5">
+  <h2 class="section-titles">PORTFOLIO</h2>
+  <hr class="home-title-hr">
+  <div class="container py-5 mt-5">
+    <div class="row">
+      <% posts.forEach(post =>{ %>
+        <% if(posts.length > 4){ %>
+          <div class="col-md-6 col-lg-4">
+        <% } else{ %>
+          <div class="col-lg-6">
+        <% } %>    
+              <div class="card-deck card-home">
+                  <div class="card">
+                      <div class="hovereffect">
+                        <img class="card-img card-img-top img-responsive" src="<%= post.image %>" alt="<%= post.title %>">
+                        <div class="overlay">
+                          <h2><%= post.title %></h2>
+                          <h3><%= post.techs %></h3>
+                          <p>
+                            <button type="button" class="btn btn-info modal-trigger" data-toggle="modal" data-target="#modalCenter" 
+                              data-title= "<%= post.title %>"
+                              data-desc= "<%= post.shortDesc %>"
+                              data-body= "<%= post.body %>"
+                              data-image= "<%= post.image %>"
+                              data-url= "<%= post.url %>"
+                              data-github= "<%= post.github %>">
+                              LEARN MORE
+                            </button>
+                          </p>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      <% }); %>
+      <!-- Modal -->
+      <div class="modal fade bd-example-modal-lg" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title text-dark"></h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div>
+              <img class="modal-img img-fluid" src="" alt="">
+              <div class="modal-desc text-info mt-2 h5"></div>
+              <div class="modal-body line-break"></div>
+            </div>
+            <div class="modal-footer">
+              <a class="modal-url btn btn-dark text-white" href="" target="_blank"><i class="far fa-eye"></i>&nbsp View Site</a>
+              <a class="modal-github btn btn-info text-white" href="" target="_blank"><i class="fab fa-github"></i>&nbsp GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="home-contact" class="text-dark home-title-items">
+  <h2 class="section-titles">CONTACT</h2>
+  <hr class="home-title-hr">
+  <div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form">
+				<span class="contact100-form-title">
+					Send Me a Message
+				</span>
 
+				<div class="wrap-input100 validate-input" data-validate="Please enter your name.">
+					<input class="input100" type="text" name="name" placeholder="Name" maxlength="1024" id="form-name">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Please enter your email: email@example.com">
+					<input class="input100" type="text" name="email" placeholder="Email" maxlength="256" id="form-email">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" maxlength="128" data-validate = "Please enter your phone number.">
+					<input class="input100" type="text" name="phone" placeholder="Phone Number" maxlength="128" id="form-phone">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Please enter your message.">
+					<textarea class="input100" name="message" placeholder="Your Message" maxlength="5096" id="form-message"></textarea>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn" id="send-btn">
+						<span>
+							<i class="fa fa-paper-plane mr-2" aria-hidden="true"></i>
+							Send
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 
 <%- include("partials/footer") %>

@@ -38,9 +38,10 @@
                         <img class="card-img card-img-top" src="<%= post.image %>" alt="<%= post.title %>">
                         <div class="card-body">
                             <h4 class="card-title"><%= post.title %></h4>
+                            <p class="card-text text-info">Rank: <%= post.rank %></p>
                             <p class="card-text text-info"><%= post.shortDesc %></p>
                             <h6 class="card-title text-primary"><%= post.techs %></h6>
-                            <p class="card-text"><%= post.body %></p>
+                            <p class="card-text line-break"><%= post.body %></p>
                             <a href="<%= post.url %>" target="_blank" class= "btn btn-outline-success hovering-effect-button mr-1">Link</a>
                             <a href="/edit/<%= post._id %>" class= "btn btn-outline-success hovering-effect-button mr-1">Edit</a>
                             <% let color = post.hidden ? "btn-success" : "btn-outline-success" %>

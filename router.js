@@ -1,3 +1,5 @@
+const { getMaxListeners } = require("./models/user");
+
 const express            = require("express"),
       router             = express.Router(),
       passport           = require("passport"),
@@ -6,17 +8,52 @@ const express            = require("express"),
       isAdmin            = require("./middlewares/isAdmin"),
       isNotLoggedIn      = require("./middlewares/isNotLoggedIn"),
       upload             = require("./middlewares/upload"),
+      nodemailer         = require("nodemailer"),
       { celebrate, Joi } = require("celebrate"),
       fs                 = require("fs");
 
 // homepage
 router.get("/", (req, res) =>{
     let path = req.route.path;
-    res.render("home", {
-        user: req.user,
-        path
-    });
+    Post
+    .find({})
+    .find({hidden : false})
+    .sort({rank: -1})
+    .exec((err, posts) =>{
+        res.render("home", {
+            posts,
+            user: req.user,
+            path
+        });
+    })
 });
+
+router.post("/contact",
+    celebrate({
+        body: Joi.object().keys({
+            name: Joi.string().max(1024).trim().required(),
+            email: Joi.string().max(256).email().lowercase().trim().required(),
+            phone: Joi.string().max(128).trim().required(),
+            message: Joi.string().max(5096).trim().required()
+        }),
+    }),
+    (req, res) =>{
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
+            },
+        });
+        let info = {
+            from: req.body.email,
+            to: process.env.EMAILTO,
+            subject: `Portfolio Message | name: ${req.body.name} | email: ${req.body.email} | Phone Number: ${req.body.phone}`,
+            text: req.body.message
+        };
+        transporter.sendMail(info, (err, sent)=>{})
+    }
+);
 
 // new
 router.get("/new", isAdmin, (req, res) =>{
@@ -36,6 +73,8 @@ router.post("/index", isAdmin, upload.single("image"),
             techs: Joi.string().max(100).trim().required(),
             body: Joi.string().max(5000).trim().required(),
             url: Joi.string().uri().trim().required(),
+            github: Joi.string().uri().trim().required(),
+            rank: Joi.number().required()
         }),
     }),
     (req, res) =>{
@@ -45,6 +84,8 @@ router.post("/index", isAdmin, upload.single("image"),
             techs: req.body.techs,
             body: req.body.body,
             url: req.body.url,
+            github: req.body.github,
+            rank: req.body.rank,
             image: req.file.path
         }
         Post.create(fullPost, (err, post) =>{ 
@@ -79,6 +120,8 @@ router.put("/edit/:id", isAdmin, upload.single("image"),
             techs: Joi.string().max(100).trim().required(),
             body: Joi.string().max(5000).trim().required(),
             url: Joi.string().uri().trim().required(),
+            github: Joi.string().uri().trim().required(),
+            rank: Joi.number().required()
         }),
     }),
     (req, res) =>{
@@ -87,7 +130,9 @@ router.put("/edit/:id", isAdmin, upload.single("image"),
             shortDesc: req.body.shortDesc,
             techs: req.body.techs,
             body: req.body.body,
-            url: req.body.url
+            url: req.body.url,
+            github: req.body.github,
+            rank: req.body.rank
         }
         Post.findByIdAndUpdate(req.params.id, editedPost, (err, modified) =>{
             if(req.file !== undefined){
